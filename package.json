@@ -1,0 +1,44 @@
+{
+  "name": "pwsview",
+  "version": "0.0.1",
+  "author": "Mark Kwasnick <markkwasnick@gmail.com>",
+  "description": "A simple Hapi-based node.js app to query PWS data from WUnderground",
+  "contributors": [
+    {
+      "name": "Josh Hill",
+      "email": "jthill57@gmail.com"
+    }
+  ],
+  "bin": {
+    "pwsview": "./bin/server"
+  },
+  "scripts": {
+    "start": "node ./index"
+  },
+  "main": "./lib",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markkwasnick/pwsview.git"
+  },
+  "keywords": [
+    "pws",
+    "wunderground",
+    "pwsview"
+  ],
+  "dependencies": {
+    "hapi": "^3.0.1",
+    "config": "^0.4.35",
+    "request": "^2.34.0",
+    "bunyan": "^0.22.1",
+    "js-yaml": "^3.0.2",
+    "dive": "^0.3.0",
+    "underscore": "^1.6.0"
+  },
+  "analyze": false,
+  "devDependencies": {},
+  "bundledDependencies": [],
+  "license": "Not-Sure-Yet",
+  "engines": {
+    "node": ">=0.6"
+  }
+}
