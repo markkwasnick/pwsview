@@ -14,6 +14,7 @@ function bootstrapper() {
 		registerRoutes(appServer, config, log, function(err) {
 			if (err) {
 				log.error(err, 'Could not register routes!');
+				process.exit(1);
 			}
 
 			appServer.start();
@@ -38,14 +39,13 @@ function bootstrapper() {
 	}
 
 	function createApiRoutes(appServer, config, log, callback) {
-		log.info('adding api routes');
+		log.info('Adding api route(s)');
 
 		try {
 			loader.loadPlugins(config, log, function(err, plugins) {
 				log.info("Done loading plugins.");
 
 				if (plugins.length) {
-					// Consolidate
 					appServer.route(_.map(plugins, function(plugin) {
 						return plugin.route;
 					}));
@@ -61,7 +61,7 @@ function bootstrapper() {
 	}
 
 	function createStaticRoutes(appServer, config, log, callback) {
-		log.info('Adding static routes');
+		log.info('Adding static route(s)');
 
 		try {
 			appServer.route({
