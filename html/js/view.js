@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var stationId = window.location.search.slice(1);
 
-var terms = {
+var dataMap = {
 	"lu"						: "Time Elapsed Since First Poll",
 	"ageh"					: "Hours Since First Poll",
 	"agem"					: "Minutes Since First Poll",
@@ -20,23 +20,40 @@ var terms = {
 };
 
 var CurrentView = React.createClass({
-  loadDataFromServer: function() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      success: function(data) {
-      	console.log(data.data);
-        this.setState({data: data.data});
-      }.bind(this)
-    });
-  },
-  getInitialState: function() {
-    return {data: []};
-  },
-  componentWillMount: function() {
-    this.loadDataFromServer();
-    setInterval(this.loadDataFromServer, this.props.pollInterval);
-  },
+ getInitialState: function () {
+     return {
+         data: [],
+         error: null
+     };
+ },
+ setStateFromResponse: function (data, error) {
+     this.setState({
+         data: data,
+         error: error
+     });
+     return;
+ },
+ loadDataFromServer: function () {
+     $.ajax({
+         url: this.props.url,
+         dataType: 'json',
+         success: function (queryResult) {
+             this.setStateFromResponse(queryResult.data, null);
+         }.bind(this),
+         error: function (err) {
+             this.setStateFromResponse(err.responseJson, err);
+         }.bind(this)
+     });
+ },
+ getInitialState: function () {
+     return {
+         data: []
+     };
+ },
+ componentWillMount: function () {
+     this.loadDataFromServer();
+     setInterval(this.loadDataFromServer, this.props.pollInterval);
+ },
   render: function() {
     return (
       <div className="currentView">
@@ -46,6 +63,15 @@ var CurrentView = React.createClass({
       </div>
     );
   }
+});
+
+var CurrentViewError = React.createClass({
+	getInitialState: function() {
+		return {};
+	},
+	render: function() {
+
+	}
 });
 
 var CurrentConditions = React.createClass({
@@ -60,7 +86,7 @@ var CurrentConditions = React.createClass({
 		var output = '';
 
 		_.each(currentConditions, function(condition) {
-			output += '<b>' + terms[condition[0]] + ':</b> ' + condition[1] + '<br />';
+			output += '<b>' + dataMap[condition[0]] + ':</b> ' + condition[1] + '<br />';
 		});
 
 		return (
