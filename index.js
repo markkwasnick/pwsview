@@ -4,7 +4,8 @@ var Hapi = require('hapi'),
 	util = require('util'),
 	_ = require('underscore'),
 	server = require('./bin/server'),
-	loader = require('./lib/loader');
+	loader = require('./lib/loader'),
+	discovery = require('./lib/discovery');
 
 function bootstrapper() {
 	this.start = function() {
@@ -71,6 +72,8 @@ function bootstrapper() {
 			        directory: { path: './html', listing: false, index: true }
 			    }
 			});
+
+			appServer.route((new discovery(appServer, config, log)).route);
 		}
 		catch (err) {
 			log.error(err, 'createStaticRoutes');
