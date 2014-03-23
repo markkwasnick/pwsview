@@ -32,7 +32,8 @@
     "bunyan": "^0.22.1",
     "js-yaml": "^3.0.2",
     "dive": "^0.3.0",
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "csv": "^0.3.7"
   },
   "analyze": false,
   "devDependencies": {},
