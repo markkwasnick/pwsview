@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var stationId = window.location.search.slice(1);
 
-var dataMap = {
+var terms = {
 	"lu"						: "Time Elapsed Since First Poll",
 	"ageh"					: "Hours Since First Poll",
 	"agem"					: "Minutes Since First Poll",
@@ -20,58 +20,35 @@ var dataMap = {
 };
 
 var CurrentView = React.createClass({
- getInitialState: function () {
-     return {
-         data: [],
-         error: null
-     };
- },
- setStateFromResponse: function (data, error) {
-     this.setState({
-         data: data,
-         error: error
-     });
-     return;
- },
- loadDataFromServer: function () {
-     $.ajax({
-         url: this.props.url,
-         dataType: 'json',
-         success: function (queryResult) {
-             this.setStateFromResponse(queryResult.data, null);
-         }.bind(this),
-         error: function (err) {
-             this.setStateFromResponse(err.responseJson, err);
-         }.bind(this)
-     });
- },
- getInitialState: function () {
-     return {
-         data: []
-     };
- },
- componentWillMount: function () {
-     this.loadDataFromServer();
-     setInterval(this.loadDataFromServer, this.props.pollInterval);
- },
+  loadDataFromServer: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      success: function(data) {
+      	console.log(data.data);
+        this.setState({data: data.data});
+      }.bind(this)
+    });
+  },
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentWillMount: function() {
+    this.loadDataFromServer();
+    setInterval(this.loadDataFromServer, this.props.pollInterval);
+  },
   render: function() {
     return (
-      <div className="currentView">
-        <h1>{stationId}</h1>
-      	{this.name}
-      	<CurrentConditions data={this.state.data.currentConditions} />
+      <div className="panel panel-primary">
+      	<div className="panel-heading">
+      		<h2>{stationId}</h2>
+      	</div>
+      	<div className="panel-body">
+    			<CurrentConditions data={this.state.data.currentConditions} />
+  			</div>
       </div>
     );
   }
-});
-
-var CurrentViewError = React.createClass({
-	getInitialState: function() {
-		return {};
-	},
-	render: function() {
-
-	}
 });
 
 var CurrentConditions = React.createClass({
@@ -83,15 +60,31 @@ var CurrentConditions = React.createClass({
 			return (<div></div>);
 
 		var currentConditions = _.pairs(this.props.data);
-		var output = '';
 
-		_.each(currentConditions, function(condition) {
-			output += '<b>' + dataMap[condition[0]] + ':</b> ' + condition[1] + '<br />';
+		var output = _.map(currentConditions, function(condition) {
+			return <ConditionTile condition={terms[condition[0]]}>{condition[1]}</ConditionTile>
 		});
 
 		return (
-			<div className="currentConditions">
-				<span dangerouslySetInnerHTML={{__html: output}} />
+			<div className="currentConditions row">
+				{output}
+			</div>
+		);
+	}
+});
+
+var ConditionTile = React.createClass({
+	render: function() {
+		return (
+			<div className="conditionTile col-sm-3">
+				<div className="panel panel-tile">
+					<div className="panel-heading">
+						{this.props.condition}
+					</div>
+					<div className="panel-body">
+						{this.props.children}
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -101,3 +94,4 @@ React.renderComponent(
 	<CurrentView url={"/station/" + stationId + "/current/data"} pollInterval={2000} />,
 	document.getElementById('MainContent')
 );
+

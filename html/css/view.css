@@ -6,13 +6,18 @@
 html,
 body {
   background-color: #f3f3f3;
-  background-image: url(ps_neutral.png);
 }
 
 body {
   font-family: 'Open Sans', sans-serif;
-  padding-top: 60px;
+  padding-top: 70px;
 }
+
+
+.page-title {
+  color: #666;
+}
+
 
 
 /*
