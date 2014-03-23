@@ -65,7 +65,9 @@ function bootstrapper() {
 		log.info('Adding static route(s)');
 
 		try {
-			var staticRoutes = ['/{path*}', '/current/{path}/{etc*}', '/daily/{path}/{etc*}'];
+			var staticRoutes = [['/{path*}', './html'],
+								['/current/{path}/{etc*}', './html/view'],
+								['/daily/{path}/{etc*}', './html/view']];
 			_.each(staticRoutes, function(path) {
 				registerStaticRouteByPath(appServer, log, path);
 			});
@@ -79,14 +81,14 @@ function bootstrapper() {
 		callback(null);
 	}
 
-	function registerStaticRouteByPath(appServer, log, routePath) {
-		log.info(util.format('Registering static path: %s', routePath));
+	function registerStaticRouteByPath(appServer, log, routePair) {
+		log.info(util.format('Registering static path: %s to %s', routePair[0], routePair[1]));
 
 		appServer.route({
 			method: 'GET',
-		    path: routePath,
+		    path: routePair[0],
 		    handler: {
-		        directory: { path: './html', listing: false, index: true }
+		        directory: { path: routePair[1], listing: false, index: true }
 		    }
 		});
 	}
