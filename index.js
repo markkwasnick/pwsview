@@ -66,8 +66,7 @@ function bootstrapper() {
 
 		try {
 			var staticRoutes = [['/{path*}', './html'],
-								['/current/{path}/{etc*}', './html/view'],
-								['/daily/{path}/{etc*}', './html/view']];
+								['/view/{path}/{etc*}', './html/view']];
 			_.each(staticRoutes, function(path) {
 				registerStaticRouteByPath(appServer, log, path);
 			});
