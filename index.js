@@ -65,14 +65,10 @@ function bootstrapper() {
 		log.info('Adding static route(s)');
 
 		try {
-			appServer.route({
-				method: 'GET',
-			    path: '/{path*}',
-			    handler: {
-			        directory: { path: './html', listing: false, index: true }
-			    }
+			var staticRoutes = ['/{path*}', '/current/{path}/{etc*}', '/daily/{path}/{etc*}'];
+			_.each(staticRoutes, function(path) {
+				registerStaticRouteByPath(appServer, log, path);
 			});
-
 			appServer.route((new discovery(appServer, config, log)).route);
 		}
 		catch (err) {
@@ -81,6 +77,18 @@ function bootstrapper() {
 		}
 
 		callback(null);
+	}
+
+	function registerStaticRouteByPath(appServer, log, routePath) {
+		log.info(util.format('Registering static path: %s', routePath));
+
+		appServer.route({
+			method: 'GET',
+		    path: routePath,
+		    handler: {
+		        directory: { path: './html', listing: false, index: true }
+		    }
+		});
 	}
 
 	function createLogger() {
