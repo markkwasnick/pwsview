@@ -1,0 +1,23 @@
+{
+    "servers": [
+        {
+            "host": "0.0.0.0",
+            "port": 1942,
+            "options": {
+                "labels": ["http", "api"]
+            }
+        }
+    ],
+    "plugins": {
+        "pwsview": {
+            "wunderground": {
+                "server": "stationdata.wunderground.com",
+                "currenturi": "http://%s/cgi-bin/stationlookup?station=%s&format=json"
+            },
+            "wundergrounddaily": {
+                "server": "www.wunderground.com",
+                "dailyuri": "http://%s/weatherstation/WXDailyHistory.asp?ID=%s&format=1"
+            }
+        }
+    }
+}
