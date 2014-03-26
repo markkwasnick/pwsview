@@ -31,35 +31,55 @@ Format:
     {
       "message": "Success",
       "data": {
-        "name": "{stationId}",
+        "dataAge": {
+          "hours": 0,
+          "minutes": 0,
+          "seconds": 27
+        },
+        "stationId": "{stationId}",
+        "stationLocation": {
+          "gps_lat": {float_lat},
+          "gps_lon": {float_lon},
+          "city": "{city}",
+          "state": "{state}",
+          "country": "{country}",
+          "neighborhood": "{neighborhood}"
+        },
         "currentConditions": {
-          "lu": "1395711588",
-          "ageh": "0",
-          "agem": "0",
-          "ages": "15",
-          "type": "PWS",
-          "winddir": "96",
-          "windspeedmph": "0.0",
-          "windgustmph": "0.0",
-          "humidity": "69",
-          "tempf": "36.7",
-          "rainin": "0.00",
-          "dailyrainin": "0.00",
-          "baromin": "30.15",
-          "dewpointf": "30.50",
-          "windchillf": "36"
+          "winddir": 298,
+          "windspeedmph": 0,
+          "windgustmph": 0,
+          "humidity": 96,
+          "tempf": 29.8,
+          "rainin_recent": 0,
+          "rainin_daily": 0,
+          "baromin": 29.97,
+          "dewptf": 28.8,
+          "weather_code": 0,
+          "clouds_code": 0,
+          "windchillf": 29,
+          "heatindexf": 30,
+          "elevationf": 453,
+          "maxtemp_daily": 30.4,
+          "maxtemp_time": "12:00am",
+          "mintemp_daily": 29.8,
+          "mintemp_time": "12:39AM",
+          "maxdewpoint": 29.3,
+          "mindewpoint": 28.8,
+          "maxpressure": 29.97,
+          "minpressure": 29.95,
+          "maxwindspeed": 0,
+          "maxwindgust": 0,
+          "maxrain_hr": 0,
+          "maxheatindex": 30,
+          "minwindchill": 29,
+          "indoortempf": 74.5,
+          "indoorhumidity": 32
         }
       },
-      "generatedInMs": 326
+      "generatedInMs": 187
     }
 
-**lu: The UNIX timestamp for when this was fetched**
-
-**ageh: How old, hours**
-
-**agem: How old, minutes**
-
-**ages: How old, seconds**
 
 ####HTTP404
 

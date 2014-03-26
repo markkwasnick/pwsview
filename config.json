@@ -12,7 +12,7 @@
         "pwsview": {
             "wunderground": {
                 "server": "stationdata.wunderground.com",
-                "currenturi": "http://%s/cgi-bin/stationlookup?station=%s&format=json"
+                "currenturi": "http://%s/cgi-bin/stationlookup?station=%s"
             },
             "wundergrounddaily": {
                 "server": "www.wunderground.com",
