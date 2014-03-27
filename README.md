@@ -9,6 +9,10 @@ provides both a UI and API methods.
 
 ##Getting Started
 
+Install the following dependencies:
+
+    Python 2.7.x (required for node-gyp) https://www.python.org/download/releases/2.7.6/
+
 After you clone, run the following commands in the root directory of pwsview:
 
     npm install
