@@ -7,7 +7,7 @@ View current and daily data for personal weather stations that report
 to Weather Underground. You simply provide a station ID. This plugin 
 provides both a UI and API methods.
 
-##Getting Started
+## Getting Started
 
 Install the following dependencies:
 
@@ -24,11 +24,11 @@ To start the application after this, simply:
 
 	npm start
 
-##API
+## API
 
-###Current Conditions **/station/{stationId}/current/data**
+### Current Conditions **/station/{stationId}/current/data**
 
-####HTTP 200
+#### HTTP 200
 
 Format:
 
@@ -85,7 +85,7 @@ Format:
     }
 
 
-####HTTP404
+#### HTTP404
 
 Format:
 
@@ -94,7 +94,7 @@ Format:
       "data": "{stationId}"
     }
 
-####HTTP500
+#### HTTP500
 
 Format:
 
@@ -103,9 +103,9 @@ Format:
       "data": "[Exception Data]"
     }
 
-###Daily Conditions **/station/{stationId}/daily/data**
+### Daily Conditions **/station/{stationId}/daily/data**
 
-####HTTP 200
+#### HTTP 200
 
 Format:
 
@@ -175,7 +175,7 @@ Format:
 
 **data: Array of data elements matching the headers in columns**
 
-####HTTP404
+#### HTTP404
 
 Format:
 
@@ -184,7 +184,7 @@ Format:
       "data": "{stationId}"
     }
 
-####HTTP500
+#### HTTP500
 
 Format:
 
